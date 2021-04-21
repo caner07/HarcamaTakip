@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Harcama Takip</string>
+    <string name="gec">Geç</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="harcamaniz">Harcamanız</string>
+    <string name="tl">TL</string>
+    <string name="sterlİn">STERLİN</string>
+    <string name="euro">EURO</string>
+    <string name="dolar">DOLAR</string>
+    <string name="ekle">EKLE</string>
+    <string name="cost">%1$d %2$s</string>
+    <string name="user">%1$s %2$s</string>
+    <string name="total">%1$d %2$s</string>
+    <string name="aciklama">Açıklama</string>
+    <string name="harcama_turu">Harcama Türü Seçiniz</string>
+    <string name="kira">Kira</string>
+    <string name="fatura">Fatura</string>
+    <string name="diger">Diğer</string>
+    <string name="harcama_miktar">Harcama Miktarı</string>
+    <string name="para_birimi_se_iniz">Para Birimi Seçiniz</string>
+    <string name="isim">İsminizi Giriniz</string>
+    <string name="erkek">Erkek</string>
+    <string name="kadin">Kadın</string>
+    <string name="belirtmek_stemiyorum">Belirtmek İstemiyorum</string>
+    <string name="kaydet">Kaydet</string>
+</resources>
