@@ -1,8 +1,6 @@
 package com.canerkaya.harcamatakip.View
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,23 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.canerkaya.harcamatakip.Adapter.PaymentsAdapter
+import com.canerkaya.harcamatakip.Data.DatabaseManager
 import com.canerkaya.harcamatakip.Model.PaymentModel
-import com.canerkaya.harcamatakip.Model.TrToUsdModel
-import com.canerkaya.harcamatakip.Model.UserModel
 import com.canerkaya.harcamatakip.R
-import com.canerkaya.harcamatakip.Service.ApiMethods
-import com.canerkaya.harcamatakip.Service.RetrofitClient
-import com.canerkaya.harcamatakip.Util.CustomSharedPreferences
 import com.canerkaya.harcamatakip.ViewModel.HomeViewModel
+import com.canerkaya.harcamatakip.ViewModelFactory.HomeViewModelFactory
 import com.canerkaya.harcamatakip.databinding.FragmentHomeBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),PaymentsAdapter.Listener {
     private var fragmentBinding:FragmentHomeBinding?=null
     private var binding:FragmentHomeBinding?=null
     private lateinit var viewModel:HomeViewModel
@@ -36,19 +26,30 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
         fragmentBinding = binding
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val application = requireNotNull(this.activity).application
+        val database = DatabaseManager.getDatabaseManager(application).paymentDao()
+        val viewModelFactory = HomeViewModelFactory(database,application)
+        viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         moveFab()
         setClicks()
         observeLiveData()
-        checkUser()
+        getInfo()
         toggleGroupControl()
 
     }
@@ -66,9 +67,14 @@ class HomeFragment : Fragment() {
             }
         }
     }
-    fun checkUser(){
-        viewModel.getUser(requireContext())
+    fun getInfo(){
+        viewModel.getUser()
+        viewModel.getPayments()
+    }
 
+    override fun onItemClick(paymentModel: PaymentModel,costType:String) {
+        val action = HomeFragmentDirections.actionHomeFragmentToPaymentDetailsFragment(paymentModel,costType)
+        findNavController().navigate(action)
     }
 
     fun observeLiveData(){
@@ -82,16 +88,28 @@ class HomeFragment : Fragment() {
         })
 
         viewModel.paymentList.observe(viewLifecycleOwner,{
-            val adapter = PaymentsAdapter(it,viewModel.checkedButton.value!!)
+            val adapter = PaymentsAdapter(it,viewModel.checkedButton.value!!,this)
             binding?.paymentsRecyclerView?.adapter = adapter
             adapter.notifyDataSetChanged()
         })
 
         viewModel.checkedButton.observe(viewLifecycleOwner,{
-            val adapter = viewModel.paymentList.value?.let { it1 -> PaymentsAdapter(it1,it) }
+            val adapter = viewModel.paymentList.value?.let { it1 -> PaymentsAdapter(it1,it,this) }
             binding?.paymentsRecyclerView?.adapter = adapter
             binding?.toplamTv?.setText(getString(R.string.total,viewModel.checkedButtonControl(),it))
             adapter?.notifyDataSetChanged()
+        })
+        viewModel.tlTotal.observe(viewLifecycleOwner,{
+            binding?.toplamTv?.setText(getString(R.string.total,viewModel.checkedButtonControl(),viewModel.checkedButton.value))
+        })
+        viewModel.dolarTotal.observe(viewLifecycleOwner,{
+            binding?.toplamTv?.setText(getString(R.string.total,viewModel.checkedButtonControl(),viewModel.checkedButton.value))
+        })
+        viewModel.sterlinTotal.observe(viewLifecycleOwner,{
+            binding?.toplamTv?.setText(getString(R.string.total,viewModel.checkedButtonControl(),viewModel.checkedButton.value))
+        })
+        viewModel.euroTotal.observe(viewLifecycleOwner,{
+            binding?.toplamTv?.setText(getString(R.string.total,viewModel.checkedButtonControl(),viewModel.checkedButton.value))
         })
     }
 

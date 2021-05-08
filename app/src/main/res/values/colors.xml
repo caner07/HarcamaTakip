@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorSplash">#EEB850</color>
+    <color name="delete">#ED6237</color>
 
 </resources>

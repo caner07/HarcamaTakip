@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">Harcama Takip</string>
     <string name="gec">Geç</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="harcamaniz">Harcamanız</string>
-    <string name="tl">TL</string>
-    <string name="sterlİn">STERLİN</string>
-    <string name="euro">EURO</string>
-    <string name="dolar">DOLAR</string>
+    <string name="tl">₺</string>
+    <string name="sterlİn">£</string>
+    <string name="euro">€</string>
+    <string name="dolar">$</string>
     <string name="ekle">EKLE</string>
     <string name="cost">%1$d %2$s</string>
     <string name="user">%1$s %2$s</string>
@@ -24,4 +22,11 @@
     <string name="kadin">Kadın</string>
     <string name="belirtmek_stemiyorum">Belirtmek İstemiyorum</string>
     <string name="kaydet">Kaydet</string>
+    <string name="sil">Sil</string>
+    <string name="silindi">Harcama Silindi</string>
+    <string name="hata">Hata!</string>
+    <string name="tamam">Tamam</string>
+    <string name="bos_birakma">Bu Alan Boş Bırakılamaz</string>
+    <string name="bos_birakma2">Lütfen Tüm Alanları Doldurun!</string>
+    <string name="kur_hata">Kayıtlı kur bilgisi bulunamadı</string>
 </resources>

@@ -11,7 +11,7 @@ interface PaymentDao {
     @Insert(entity = PaymentModel::class)
     suspend fun insertPayment(model: PaymentModel):Long
 
-    @Query("SELECT * FROM PAYMENTS")
+    @Query("SELECT * FROM PAYMENTS ORDER BY primaryKey DESC ")
     suspend fun getPaymentsFromDatabase():List<PaymentModel>
 
     @Query("DELETE FROM PAYMENTS WHERE primaryKey = :key")

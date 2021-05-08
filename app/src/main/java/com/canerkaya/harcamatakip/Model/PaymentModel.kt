@@ -1,9 +1,12 @@
 package com.canerkaya.harcamatakip.Model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "payments")
 data class PaymentModel(
 
@@ -24,8 +27,7 @@ data class PaymentModel(
 
     @ColumnInfo(name = "euroCost")
     val euroCost:Int
-)
-{
+) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var primaryKey:Int = 0
 }

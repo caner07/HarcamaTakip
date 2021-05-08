@@ -12,10 +12,25 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_addPaymentFragment"
-            app:destination="@id/addPaymentFragment" />
+            app:destination="@id/addPaymentFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentDetailsFragment"
+            app:destination="@id/paymentDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -27,4 +42,16 @@
         android:name="com.canerkaya.harcamatakip.View.AddPaymentFragment"
         android:label="fragment_add_payment"
         tools:layout="@layout/fragment_add_payment" />
+    <fragment
+        android:id="@+id/paymentDetailsFragment"
+        android:name="com.canerkaya.harcamatakip.View.PaymentDetailsFragment"
+        android:label="fragment_payment_details"
+        tools:layout="@layout/fragment_payment_details" >
+        <argument
+            android:name="payment"
+            app:argType="com.canerkaya.harcamatakip.Model.PaymentModel" />
+        <argument
+            android:name="costType"
+            app:argType="string" />
+    </fragment>
 </navigation>

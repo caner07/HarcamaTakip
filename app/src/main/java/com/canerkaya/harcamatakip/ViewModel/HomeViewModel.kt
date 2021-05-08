@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.canerkaya.harcamatakip.Data.DatabaseManager
+import com.canerkaya.harcamatakip.Data.PaymentDao
 import com.canerkaya.harcamatakip.Model.PaymentModel
 import com.canerkaya.harcamatakip.Model.UserModel
 import com.canerkaya.harcamatakip.Util.CustomSharedPreferences
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class HomeViewModel(application: Application):AndroidViewModel(application),CoroutineScope {
+class HomeViewModel(val database:PaymentDao,application: Application):AndroidViewModel(application),CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
@@ -36,10 +37,10 @@ class HomeViewModel(application: Application):AndroidViewModel(application),Coro
         dolarTotal.value = 0
         euroTotal.value = 0
         sterlinTotal.value = 0
-        checkedButton.value = "₺"
+        getUser()
         getPayments()
 
-
+        checkedButton.value = "₺"
     }
 
     fun checkedButtonControl():Int{
@@ -54,35 +55,31 @@ class HomeViewModel(application: Application):AndroidViewModel(application),Coro
     }
 
 
-
-
     fun getPayments(){
         launch {
-            val dao = DatabaseManager.getDatabaseManager(getApplication()).paymentDao()
-            paymentList.value = ArrayList(dao.getPaymentsFromDatabase())
-            //dao.insertPayment(PaymentModel("Diğer","caner",5,4,3,2))
+            paymentList.value = ArrayList(database.getPaymentsFromDatabase())
             var tl =0
             var dolar =0
             var euro =0
             var sterlin =0
             for (i in 0..(paymentList.value!!.size-1)){
                 tl = tl+ paymentList.value!![i].tlCost
-                dolar = tl+ paymentList.value!![i].dolarCost
-                euro = tl+ paymentList.value!![i].euroCost
-                sterlin = tl+ paymentList.value!![i].sterlinCost
+                dolar = dolar+ paymentList.value!![i].dolarCost
+                euro = euro+ paymentList.value!![i].euroCost
+                sterlin = sterlin+ paymentList.value!![i].sterlinCost
             }
             tlTotal.value = tl
             dolarTotal.value = dolar
             euroTotal.value = euro
             sterlinTotal.value = sterlin
-            checkedButton.value = "₺"
+
         }
 
     }
 
-    fun getUser(context: Context){
-        val userName = CustomSharedPreferences(context).getUserName().orEmpty()
-        val userGender = CustomSharedPreferences(context).getUserGender().orEmpty()
+    fun getUser(){
+        val userName = CustomSharedPreferences(getApplication()).getUserName().orEmpty()
+        val userGender = CustomSharedPreferences(getApplication()).getUserGender().orEmpty()
         user.value = UserModel(userName,userGender)
     }
 

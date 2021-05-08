@@ -88,6 +88,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"
+            android:weightSum="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:checkedButton="@id/tlButton"
@@ -95,7 +96,8 @@
             app:singleSelection="true">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tlButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:text="@string/tl"
                 style="?attr/materialButtonOutlinedStyle"
                 app:shapeAppearance="@style/Rounded"
@@ -106,7 +108,8 @@
                 android:text="@string/sterlİn"
                 android:id="@+id/sterlinButton"
                 app:shapeAppearance="@style/Rounded"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_height="wrap_content">
 
@@ -114,7 +117,8 @@
             <com.google.android.material.button.MaterialButton
                 app:shapeAppearance="@style/Rounded"
                 android:id="@+id/euroButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:text="@string/euro"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_height="wrap_content">
@@ -124,7 +128,8 @@
                 android:id="@+id/dolarButton"
                 app:shapeAppearance="@style/Rounded"
                 android:text="@string/dolar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_height="wrap_content">
 

@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.canerkaya.harcamatakip.Model.PaymentModel
 import com.canerkaya.harcamatakip.R
 
-class PaymentsAdapter(private val paymentList:ArrayList<PaymentModel>,private val costType:String):RecyclerView.Adapter<PaymentsAdapter.RowHolder>() {
-
+class PaymentsAdapter(private val paymentList:ArrayList<PaymentModel>,private val costType:String,private val listener:Listener):RecyclerView.Adapter<PaymentsAdapter.RowHolder>() {
+    interface Listener{
+        fun onItemClick(paymentModel: PaymentModel,costType: String)
+    }
     class RowHolder(view:View):RecyclerView.ViewHolder(view) {
         val paymentImage:ImageView = view.findViewById(R.id.paymentLogoImageView)
         val paymentName:TextView = view.findViewById(R.id.paymentNameTv)
@@ -41,6 +43,7 @@ class PaymentsAdapter(private val paymentList:ArrayList<PaymentModel>,private va
                 holder.paymentImage.setImageResource(R.drawable.shop_icon)
             }
         }
+        holder.itemView.setOnClickListener {listener.onItemClick(paymentList[position],costType)}
 
     }
 
