@@ -10,6 +10,8 @@ Google Developer Groups Turkey'nin düzenlediği Android Bootcamp etkinliğinin 
 ### Api ile veri alışverişi -> [Retrofit](https://square.github.io/retrofit/)
 ### Fragmentlar arası geçişi yönetmek için -> [Navigation Graph](https://developer.android.com/guide/navigation/navigation-getting-started)
 ### Uygulamanın kaynak tüketiminizi azaltmak için -> [Coroutines](https://developer.android.com/kotlin/coroutines)
+### Kur çevrimleri için kullandığım API ->[Currency Converter](https://free.currencyconverterapi.com)
+## API KEY -> e95c24e1abf8f4b63baa
 ---
 ---
 
